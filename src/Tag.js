@@ -1,34 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Tag.css';
 
 const frequency  = [];
 
 class Tag extends Component{
     state = {
-        data: [],
         filterIndex: null,
     }
 
-    componentDidMount(){
-        this.catCountry();
-    }
-
-    catCountry = async () => {
-        const url = 'https://api.thecatapi.com/v1/breeds'
-        try{
-            const response = await axios.get(url);
-            const catcountry = await response.data;
-            this.setState({
-                data: catcountry,
-            })
-        } catch (error){
-            console.log(error);
-        }
-    }
-
     origin = () => {
-        this.state.data.map((country) => (
+        this.props.data.map((country) => (
             frequency.push(country?.origin)
         ))
     
@@ -47,7 +28,7 @@ class Tag extends Component{
         
         return(
             uniqueOrigin.map((index) => (
-                <button key={index.id}>{index}{` (${countOrigin(index)})`}</button>
+                <button key={index.id} >{index}{` (${countOrigin(index)})`}</button>
             ))
         )
     }
