@@ -1,39 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Tag.js';
 import './Tag.css';
 
 const frequency  = [];
 
-const Origin = ({metaData}) => {
-    metaData.map((country) => (
-        frequency.push(country?.origin)
-    ))
-
-    const countOrigin = (countryName) => {
-        const count = frequency.filter((origin) => (
-            origin === countryName
-        ))
-        return(  
-            (count.length / 2)
-        )
-    }
-         
-    const uniqueOrigin = frequency.filter((value, index, self) => (
-        self.indexOf(value) === index
-    ))
-
-    return(
-        <li>ALL (67)</li>,
-        uniqueOrigin.map((index) => (
-            <li key={index.id}>{index}{` (${countOrigin(index)})`}</li>
-        ))
-    )
-}
-
 class Tag extends Component{
     state = {
         data: [],
+        filterIndex: null,
     }
 
     componentDidMount(){
@@ -52,7 +26,32 @@ class Tag extends Component{
             console.log(error);
         }
     }
+
+    origin = () => {
+        this.state.data.map((country) => (
+            frequency.push(country?.origin)
+        ))
     
+        const countOrigin = (countryName) => {
+            const count = frequency.filter((origin) => (
+                origin === countryName
+            ))
+            return(  
+                count.length
+            )
+        }
+             
+        const uniqueOrigin = frequency.filter((value, index, self) => (
+            self.indexOf(value) === index
+        ))
+        
+        return(
+            uniqueOrigin.map((index) => (
+                <button key={index.id}>{index}{` (${countOrigin(index)})`}</button>
+            ))
+        )
+    }
+
     render(){
         return(
             <div className="tag">
@@ -60,7 +59,9 @@ class Tag extends Component{
                     <h3>Origin</h3>
                 </div>
                 <div className="tag_list">
-                    <Origin metaData = {this.state.data} key={this.state.data.id}/>
+                    {
+                        this.origin()
+                    }
                 </div>
             </div>
         )

@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Body.css';
 import Modal from 'react-bootstrap/esm/Modal';
 
-
 class Body extends Component{
     state = {
         data: [],
@@ -12,7 +11,7 @@ class Body extends Component{
     }
     
     componentDidMount(){
-        this.catData()
+        this.catData();
     }
     
     catData = async () => {
@@ -37,7 +36,7 @@ class Body extends Component{
         console.log('Array is: ')
         console.log(this.state.data[this.state.modalIndex])
     }
-    
+
     styles = {
         backgroundImage: this.state.data[this.state.modalIndex]?.image?.url,
     }
@@ -46,7 +45,15 @@ class Body extends Component{
         return(
             <div className="body">
                 {
-                    this.state.data.map((cat, index) => (
+                    this.state.data.filter(cat => {
+                        if(cat.origin === this.props.filterIndex){
+                            return cat
+                        }
+                        else{
+                            return cat
+                        }
+                    }).map((cat, index) => {
+                        return(
                             <div className="body_card" key={cat.id}>
                                 <div className="body_cardImage">
                                     <img src={cat.image?.url} alt={cat.name} />
@@ -55,12 +62,11 @@ class Body extends Component{
                                 <div className="body_cardInfo">
                                     <h3>{cat.name}</h3>
                                     <button onClick={() => {this.setState({ openModal: true, modalIndex: index })}} id={cat.id} >View Details</button>
-                                </div>
-                                
+                                </div>    
                             </div>
-                    ))
+                        )
+                    })
                 }
-
                 <Modal
                     {...this.state.data[this.state.modalIndex]}
                     show= {this.state.openModal}

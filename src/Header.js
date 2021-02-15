@@ -6,7 +6,6 @@ class Header extends Component{
         return(
             <header className="header">
                 <h2>Cat Paradise</h2>
-                {/* SearchIcon */}
             </header>
         )
     }
