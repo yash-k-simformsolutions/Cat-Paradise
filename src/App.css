@@ -1,0 +1,12 @@
+.app_divider{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 5px;
+}
+
+@media (max-width : 810px) {
+    .app_divider{
+        flex-direction: column-reverse;
+    }
+}
