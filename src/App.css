@@ -1,4 +1,4 @@
-.app_divider{
+.app_Divider{
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width : 810px) {
-    .app_divider{
+    .app_Divider{
         flex-direction: column-reverse;
     }
 }

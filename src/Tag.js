@@ -27,8 +27,8 @@ class Tag extends Component{
         ))
         
         return(
-            uniqueOrigin.map((index) => (
-                <button key={index.id} >{index}{` (${countOrigin(index)})`}</button>
+            uniqueOrigin.map((origin, i) => (
+                <button key={i} value={origin} onClick={(e) => {this.props.handleOrigin(e, origin)}} >{origin}{` (${countOrigin(origin)})`}</button>
             ))
         )
     }
