@@ -34,6 +34,7 @@ class Tag extends Component{
                     <h3>Origin</h3>
                 </div>
                 <div className="tag_list">
+                    <button onClick={this.props.handleChangeState}>All (67)</button>
                     {
                         this.origin()
                     }
